@@ -1,0 +1,170 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+header .logo {
+    max-width: 150px;
+}
+
+nav {
+    text-align: right;
+}
+
+.nav {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    display: inline;
+    margin-right: 20px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+}
+
+/* Welcome Section */
+.welcome-section {
+    background-color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 1.2em;
+}
+
+/* Promotion Section */
+.promotion-section {
+    background-color: #f9f9f9;
+    padding: 30px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.promotion-section .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.promotion-section .col {
+    width: 30%; /* Ensure three columns fit in a row */
+    opacity: 0; /* Hidden initially */
+    transform: translateY(50px); /* Start position for animation */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Transition effects */
+    margin: 10px;
+}
+
+.promotion-section .col h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.promotion-section .col p {
+    font-size: 1em;
+}
+
+/* Featured Destinations Section */
+.featured-destinations {
+    background-color: #fff;
+    padding: 30px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.featured-destinations h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.featured-destinations p {
+    font-size: 1.2em;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+.social-links {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.social-links li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.social-links i.material-icons {
+    font-size: 24px;
+    color: #fff;
+    vertical-align: middle;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
