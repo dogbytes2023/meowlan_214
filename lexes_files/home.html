@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyDream Airlines</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .banner {
+            background-image: "banner.png";
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        .logo {
+            max-height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <a class="navbar-brand" href="#">
+                <img src="./logo.png" alt="FlyDream" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="banner">
+            <div class="container">
+                <h1 class="display-4">Welcome back, @meowlan2024</h1>
+            </div>
+        </section>
+
+        <section class="container my-5">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="book-tab" data-bs-toggle="tab" data-bs-target="#book" type="button" role="tab">Book/Reserve</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="manage-tab" data-bs-toggle="tab" data-bs-target="#manage" type="button" role="tab">Manage Your Flight</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="myTabContent">
+                        <div class="tab-pane fade show active" id="book" role="tabpanel">
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" placeholder="From">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" placeholder="To">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="date" class="form-control" placeholder="When">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="number" class="form-control" placeholder="Passengers">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select class="form-select">
+                                            <option selected>Cabin class</option>
+                                            <option>Economy</option>
+                                            <option>Business</option>
+                                            <option>First Class</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-warning mt-3">Search</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="manage" role="tabpanel">
+                            <form>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Ticket no/Reservation code">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control" placeholder="Your email">
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-warning px-4" type="submit">SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container my-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="https://source.unsplash.com/400x300/?food" class="img-fluid rounded" alt="Promotion 1">
+                    <p class="mt-2">Promotion 1</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://source.unsplash.com/400x300/?beach" class="img-fluid rounded" alt="Promotion 2">
+                    <p class="mt-2">Promotion 2</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://source.unsplash.com/400x300/?city" class="img-fluid rounded" alt="Promotion 3">
+                    <p class="mt-2">Promotion 3</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>ABOUT</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">About us</a></li>
+                        <li><a href="#" class="text-light">Project details</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>SUPPORT</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Contact</a></li>
+                        <li><a href="#" class="text-light">Q&A</a></li>
+                        <li><a href="#" class="text-light">Branches near me</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>LEGAL</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                        <li><a href="#" class="text-light">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <p class="text-center mb-0"></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
