@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Existing Styles */
         .banner {
             background-image: url("banner.png");
             background-size: cover;
@@ -59,7 +61,7 @@
         .button-text {
             font-size: 10pt;
         }
-        
+
         .modify-section {
             text-align: center;
             margin-bottom: 20px;
@@ -69,10 +71,19 @@
             text-align: center;
         }
 
+        .progress-tracker .col {
+            text-align: center;
+        }
+
+        .progress-tracker .col.active {
+            color: white;
+            background-color: #fecb00;
+        }
     </style>
 </head>
+
 <body class="d-flex flex-column min-vh-100">
-    
+
     <header class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-light container">
             <a class="navbar-brand" href="#">
@@ -92,30 +103,20 @@
     </header>
 
     <main>
+        <!-- Progress Tracker -->
         <section class="container my-5">
-            <div class="row">
+            <div class="row progress-tracker">
                 <div class="col mono center active">
-                    <span class="active button-text">Flights</span>
+                    <span class="button-text">Flights</span>
                 </div>
                 <div class="col mono center bg-light">
-                    <span class="button-text">
-                        Seat selection
-                    </span>
+                    <span class="button-text">Seat selection</span>
                 </div>
                 <div class="col mono center bg-light">
-                    <span class="button-text">
-                        In-flight services
-                    </span>
+                    <span class="button-text">Details</span>
                 </div>
                 <div class="col mono center bg-light">
-                    <span class="button-text">
-                        Details
-                    </span>
-                </div>
-                <div class="col mono center bg-light">
-                    <span class="button-text">
-                        Payment
-                    </span>
+                    <span class="button-text">Payment</span>
                 </div>
             </div>
         </section>
@@ -135,7 +136,6 @@
                 </div>
             </div>
 
-           
             <!-- Collapsible content -->
             <div class="collapse" id="collapseFlightDetails">
                 <form>
@@ -165,53 +165,192 @@
                 </form>
             </div>
 
-             <!-- Collapsible Modify Button -->
-             <div class="text-center modify-section my-3">
-                <button class="btn btn-link mono" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFlightDetails" aria-expanded="false" aria-controls="collapseFlightDetails">
+            <!-- Collapsible Modify Button -->
+            <div class="text-center modify-section my-3">
+                <button class="btn btn-link mono" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFlightDetails"
+                    aria-expanded="false" aria-controls="collapseFlightDetails">
                     Modify V
                 </button>
             </div>
-
         </section>
 
+        <!-- Flight Selection Section -->
         <section>
-            <div>
-                <h2 class="mono page-header">Flights</h2>
-            </div>
-            <div id="select">
-                <div class="accordion" id="dep-panel">
-                    <div class="accordion-item">
-                        <h3 class="accordion-header" id="dep-panel-heading">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dep-panel-opened" aria-expanded="true" aria-controls="dep-panel-opened">
-                                Departure
-                            </button>
-                        </h3>
-                        <div id="dep-panel-opened" class="accordion-collapse collapse show" aria-labelledby="dep-panel-heading" data-bs-parent="dep-panel">
-                            <div class="accordion-body">
-                                <!--put your tickets here-->
-                            </div>
+            <!-- Flight Selection Section -->
+<section>
+    <div>
+        <h2 class="mono page-header">Flights</h2>
+    </div>
+
+    <div id="select">
+        <div class="accordion" id="dep-panel">
+            <!-- Departure Accordion Item -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="dep-panel-heading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#dep-panel-opened" aria-expanded="true" aria-controls="dep-panel-opened">
+                        Departure
+                    </button>
+                </h3>
+                <div id="dep-panel-opened" class="accordion-collapse collapse show" data-bs-parent="#dep-panel">
+                    <div class="accordion-body">
+                      <div class="d-flex justify-content-between mb-3">
+                        <div class="text-center">
+                          <div>200 AUD</div>
+                          <div class="text-muted">Wed 8</div>
                         </div>
-                    </div>
-                    <div class="accordion-item"></div>
-                        <h3 class="accordion-header" id="dep-panel-heading-2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dep-panel-2" aria-expanded="false" aria-controls="dep-panel-2">
-                                Return
-                            </button>
-                        </h3>
-                        <div id="dep-panel-2" class="accordion-collapse collapse" aria-labelledby="dep-panel-heading-2" data-bs-parent="dep-panel">
-                            <div class="accordion-body">
-                                <!--put your tickets here-->
-                            </div>
+                        <div class="text-center">
+                          <div>300 AUD</div>
+                          <div class="text-muted">Wed 8</div>
                         </div>
+                        <div class="text-center border border-warning">
+                          <div>500 AUD</div>
+                          <div class="text-muted">Wed 8</div>
+                        </div>
+                        <div class="text-center">
+                          <div>300 AUD</div>
+                          <div class="text-muted">Wed 8</div>
+                        </div>
+                        <div class="text-center">
+                          <div>300 AUD</div>
+                          <div class="text-muted">Wed 8</div>
+                        </div>
+                      </div>
+                      
+                      <div class="card mb-3">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                              <h5 class="card-title">SYD ----------------------- MEL</h5>
+                              <p class="card-text">21:00 PM - 06:00 AM</p>
+                              <p class="card-text text-muted">Flight: SIGM322</p>
+                              <p class="card-text text-muted">SYD - Domestic T2</p>
+                              <p class="card-text text-muted">21:00 PM, 19 SEP 2024</p>
+                            </div>
+                            <div class="text-end">
+                              <h5 class="card-title">Economy</h5>
+                              <p class="card-text">500 AUD</p>
+                              <button class="btn btn-link toggle-flight" data-flight="1">▼</button>
+                            </div>
+                          </div>
+                          <div class="flight-details mt-3" id="flight-1" style="display: none;">
+                            <h6>SELECT A FARE</h6>
+                            <div class="row">
+                              <div class="col-4">
+                                <div class="card">
+                                  <div class="card-body text-center">
+                                    <h6>Economy</h6>
+                                    <p>500 AUD</p>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="fare-1" id="fare-1-1">
+                                      <label class="form-check-label" for="fare-1-1"></label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="card">
+                                  <div class="card-body text-center">
+                                    <h6>Premium Economy</h6>
+                                    <p>700 AUD</p>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="fare-1" id="fare-1-2">
+                                      <label class="form-check-label" for="fare-1-2"></label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="card">
+                                  <div class="card-body text-center">
+                                    <h6>Business</h6>
+                                    <p>900 AUD</p>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="fare-1" id="fare-1-3">
+                                      <label class="form-check-label" for="fare-1-3"></label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn btn-primary mt-3">CONFIRM</button>
+                          </div>
+                        </div>
+                      </div>
+            
+                      <div class="card mb-3">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                              <h5 class="card-title">SYD ----------------------- MEL</h5>
+                              <p class="card-text">23:00 PM - 08:00 AM</p>
+                              <p class="card-text text-muted">Flight: SIGM322</p>
+                              <p class="card-text text-muted">SYD - Domestic T2</p>
+                              <p class="card-text text-muted">23:00 PM, 19 SEP 2024</p>
+                            </div>
+                            <div class="text-end">
+                              <h5 class="card-title">Economy</h5>
+                              <p class="card-text">398 AUD</p>
+                              <button class="btn btn-link toggle-flight" data-flight="2">▼</button>
+                            </div>
+                          </div>
+                          <div class="flight-details mt-3" id="flight-2" style="display: none;">
+                            <h6>SELECT A FARE</h6>
+                            <div class="row">
+                              <div class="col-4">
+                                <div class="card">
+                                  <div class="card-body text-center">
+                                    <h6>Economy</h6>
+                                    <p>398 AUD</p>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="fare-2" id="fare-2-1">
+                                      <label class="form-check-label" for="fare-2-1"></label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="card">
+                                  <div class="card-body text-center">
+                                    <h6>Premium Economy</h6>
+                                    <p>598 AUD</p>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="fare-2" id="fare-2-2">
+                                      <label class="form-check-label" for="fare-2-2"></label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="card">
+                                  <div class="card-body text-center">
+                                    <h6>Business</h6>
+                                    <p>798 AUD</p>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="fare-2" id="fare-2-3">
+                                      <label class="form-check-label" for="fare-2-3"></label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn btn-primary mt-3">CONFIRM</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+</section>
+
 
             <hr />
             <button type="submit" class="btn btn-warning mt-3">Next</button>
-
         </section>
-
     </main>
 
     <footer class="bg-dark text-light py-4 mt-5 mt-auto py-3">
@@ -227,24 +366,22 @@
                 <div class="col-md-4">
                     <h5>SUPPORT</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light">Contact</a></li>
-                        <li><a href="#" class="text-light">Q&A</a></li>
-                        <li><a href="#" class="text-light">Branches near me</a></li>
+                        <li><a href="#" class="text-light">Contact us</a></li>
+                        <li><a href="#" class="text-light">FAQs</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h5>LEGAL</h5>
+                    <h5>SOCIAL</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light">Terms & Conditions</a></li>
-                        <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        <li><a href="#" class="text-light">Facebook</a></li>
+                        <li><a href="#" class="text-light">Twitter</a></li>
                     </ul>
                 </div>
             </div>
-            <hr class="bg-light">
-            <p class="text-center mb-0">FlyDreamAir x meowLAN</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
