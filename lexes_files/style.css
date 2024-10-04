@@ -24,7 +24,7 @@ body {
 .input-form {
     position: relative;
     z-index: 2;
-    top: -100px;
+    top: -200px;
 }
 
 .logo {
@@ -171,3 +171,18 @@ body {
 }
 
 
+.navbar-brand {
+    padding-left: 40px; 
+}
+
+.nav-item {
+    padding-right: 40px;
+}
+
+.navbar-toggler {
+    margin-right: auto; 
+}
+
+#navbarToggleExternalContent {
+    
+}
