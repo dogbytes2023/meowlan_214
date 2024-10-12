@@ -1,0 +1,275 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            .mono {
+                font-family: 'Martian Mono', monospace;
+            }
+
+            .logo {
+                max-height: 150px;
+            }
+
+            .navbar-brand {
+                padding-left: 40px; 
+            }
+
+            .nav-item {
+                padding-right: 40px;
+            }
+
+            .navbar-toggler {
+                margin-right: auto; 
+            }
+
+            .mono {
+                font-family: 'Martian Mono', monospace;
+            }
+
+            .service-card {
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .service-card img {
+                height: 180px; /* Adjust the image height */
+                object-fit: cover;
+                width: 100%;
+            }
+
+            .card-header, .card-body {
+                padding: 1rem 1.5rem; /* Consistent padding */
+            }
+
+            /* Adjust the container margin */
+            .mb-4.container {
+                padding-left: 0;
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .container h5 {
+                margin-bottom: 1rem;
+            }
+
+            .card-body p {
+                margin-bottom: 0.5rem; /* Add spacing between texts */
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+        <header class="bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light container-fluid">
+                <a class="navbar-brand" href="#"><img src="../logo.png" alt="FlyDream" class="logo"></a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <hr />
+            <nav class="navbar navbar-light container-fluid">
+              <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+              </div>
+        
+              <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-light p-4">
+                  <div class="row">
+                    <h5 class="text-black h4 mono">Menu</h5>
+                  </div>
+                  <div class="row">
+                    
+                  </div>
+                </div>
+              </div>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <div class="container mt-4">
+                    <h2 class="mb-4 mono text-center">Manage Your Booking</h2><br /><br />
+        
+                    <!-- Passenger Details Section -->
+                    <div class="mb-4">
+                        <h5 class="mono">Passenger Details</h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Passenger Name:</strong></label>
+                                <p>John Doe</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Email:</strong></label>
+                                <p>john.doe@example.com</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Contact Number:</strong></label>
+                                <p>+61 123 456 789</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Passport Number:</strong></label>
+                                <p>AB1234567</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Date of Birth:</strong></label>
+                                <p>01 Jan 1980</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Booking Details Section -->
+                    <div class="mb-4">
+                        <h5 class="mono">Booking Details</h5>
+                        <p><strong>Reservation Code:</strong> ABC12345</p>
+                        <p><strong>Meal Preference:</strong> Vegetarian</p>
+                        <p><strong>Special Instructions:</strong> No peanuts, please.</p>
+                    </div>
+        
+                    <!-- Flight Details Section -->
+                    <div class="mb-4">
+                        <h5 class="mono">Flight Details</h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <label><strong>From:</strong></label>
+                                <p>SYD</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>To:</strong></label>
+                                <p>MEL</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Departure:</strong></label>
+                                <p>21:00 PM</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Arrival:</strong></label>
+                                <p>06:00 AM</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Fare:</strong></label>
+                                <p>Economy</p>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label><strong>Price:</strong></label>
+                                <p>500 AUD</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Cancellation Section -->
+                    <div class="mb-4 container">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mono">1. Cancellation</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>To cancel your reservation, please contact our customer service.</p>
+                                <a href="#" class="btn btn-warning">Contact Customer Service</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Payment Section -->
+                    <div class="mb-4 container">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mono">2. Payment</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>You have not paid for this reservation.</p>
+                                <p><strong>Due Amount:</strong> $500.00</p>
+                                <a href="#" class="btn btn-warning">Make Payment</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Seat Change Section -->
+                    <div class="mb-4 container">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mono">3. Seat Change</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>To change your seat, please use our seat selection tool.</p>
+                                <a href="#" class="btn btn-warning">Change Seat</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- In-Flight Services Section -->
+                    <div class="mb-4 container">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mono">4. In-Flight Services</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <div class="card service-card">
+                                            <img src="https://images.unsplash.com/photo-1554646963-d9f2417a48ff?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="In-flight meal">
+                                            <div class="card-body">
+                                                <p class="mt-2">Delicious in-flight meals</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="card service-card">
+                                            <img src="https://images.unsplash.com/photo-1726263259407-434a1834e64e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="In-flight entertainment">
+                                            <div class="card-body">
+                                                <p class="mt-2">State-of-the-art entertainment system</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                        
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-dark text-light py-4 mt-5 mt-auto py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>ABOUT</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">About us</a></li>
+                            <li><a href="#" class="text-light">Project details</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>SUPPORT</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Contact</a></li>
+                            <li><a href="#" class="text-light">Q&A</a></li>
+                            <li><a href="#" class="text-light">Branches near me</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>LEGAL</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                            <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="bg-light">
+                <p class="text-center mb-0">FlyDreamAir x meowLAN</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
