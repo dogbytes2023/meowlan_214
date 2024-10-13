@@ -1,0 +1,389 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            .mono {
+                font-family: 'Martian Mono', monospace;
+            }
+
+            .logo {
+                max-height: 150px;
+            }
+
+            .navbar-brand {
+                padding-left: 40px; 
+            }
+
+            .nav-item {
+                padding-right: 40px;
+            }
+
+            .navbar-toggler {
+                margin-right: auto; 
+            }
+
+            .progress-tracker {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .progress-tracker {
+                font-family: 'Martian Mono', monospace;
+                display: flex;
+            }
+
+            .progress-tracker .active {
+                background-color: #ffc107; /* Highlight the active step */
+            }
+
+            .progress-tracker .col {
+                text-align: center;
+                height: 100px;
+            }
+
+            .progress-tracker .col.action {
+                color: white;
+                background-color: #fecb00;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            .top-component .row {
+                padding: 20px 20px 20px 20px;
+            }
+
+            .top-component .row div {
+                padding: 30px 30px 30px 30px;
+            }
+
+            .action {
+                background-color: #fecb00;
+            }
+
+            .legend-square {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border-radius: 5px;
+            }
+            .selected-seat {
+                background-color: #ffc107 !important; /* Highlight color for selected seats */
+            }
+            .active-passenger {
+                background-color: #007bff;
+                color: white;
+            }
+            table {
+                margin: 0 auto;
+            }
+            
+        </style>
+        <script>
+            // Global Variables
+            let currentPassengerIndex = 0; // Track the index of the current passenger
+            let currentPassengerType = "adults";
+            let passengerSeats = {};  // Store seat assignments for each passenger
+            let takenSeats = new Set();  // Keep track of taken seats
+        
+            // Function to draw seat map
+            function drawSeats() {
+                let economy_seatmap = document.querySelector("#economy");
+                let row = 10;
+                let col = 4;
+        
+                let eco_table = document.createElement("table");
+                for (let i = 0; i < row; i++) {
+                    let row = document.createElement("tr");
+                    for (let k = 0; k < col; k++) {
+                        let seat = document.createElement("td");
+                        let seat_button = document.createElement("button");
+                        seat_button.classList.add("btn", "btn-outline-primary");
+                        seat_button.style.width = "50px";
+                        seat_button.style.height = "50px";
+                        let charcode = 65 + k; // A, B, C, D
+                        let charcodehex = String.fromCharCode(charcode);
+                        let row_num = i + 1;
+                        seat_button.id = "" + charcodehex + row_num;
+                        seat_button.innerText = seat_button.id;
+                        seat_button.type = "button"; // Ensure buttons don't submit the form
+                        seat_button.addEventListener("click", selectSeat);
+                        seat.appendChild(seat_button);
+                        row.appendChild(seat);
+                    }
+                    eco_table.appendChild(row);
+                }
+                economy_seatmap.appendChild(eco_table);
+            }
+        
+            // Function to select a seat
+            function selectSeat(e) {
+                const clickedSeat = e.target;
+                const seatId = clickedSeat.id;
+        
+                // Ensure a passenger is selected
+                if (currentPassengerIndex === null) {
+                    alert("Please select a passenger first.");
+                    return;
+                }
+        
+                // Deselect seat if already selected by the current passenger
+                if (passengerSeats[currentPassengerIndex] === seatId) {
+                    clickedSeat.classList.remove("selected-seat");
+                    delete passengerSeats[currentPassengerIndex];
+                    takenSeats.delete(seatId);
+                    updatePassengerList();
+                    return;
+                }
+        
+                // Prevent selection of already taken seats
+                if (takenSeats.has(seatId)) {
+                    alert("This seat is already taken by another passenger.");
+                    return;
+                }
+        
+                // Remove previous seat for the current passenger
+                if (passengerSeats[currentPassengerIndex]) {
+                    let previousSeat = document.getElementById(passengerSeats[currentPassengerIndex]);
+                    previousSeat.classList.remove("selected-seat");
+                    takenSeats.delete(passengerSeats[currentPassengerIndex]);
+                }
+        
+                // Assign new seat to the current passenger
+                clickedSeat.classList.add("selected-seat");
+                passengerSeats[currentPassengerIndex] = seatId;
+                takenSeats.add(seatId);
+        
+                updatePassengerList();
+            }
+        
+            // Function to update the passenger list display
+            function updatePassengerList() {
+                const passengerItems = document.querySelectorAll(".passenger-item");
+                passengerItems.forEach((item, index) => {
+                    const passengerSeat = passengerSeats[index];
+                    if (passengerSeat) {
+                        item.innerText = item.getAttribute("data-name") + " (Seat: " + passengerSeat + ")";
+                    } else {
+                        item.innerText = item.getAttribute("data-name");
+                    }
+                });
+            }
+        
+            // Function to select a passenger
+            function selectPassenger(element, index) {
+                const passengerItems = document.querySelectorAll(".passenger-item");
+                passengerItems.forEach(item => item.classList.remove("active-passenger"));
+                element.classList.add("active-passenger");
+                currentPassengerIndex = index; // Update the current passenger index
+            }
+        
+            // Function to prepare the seat selection data for submission
+            function prepareSubmission() {
+                const selectedSeatsInput = document.getElementById("selected-seats");
+                selectedSeatsInput.value = JSON.stringify(passengerSeats);
+            }
+        
+            // Load seat map and auto-select the first adult passenger on page load
+            document.addEventListener("DOMContentLoaded", () => {
+                drawSeats();
+        
+                // Automatically select the first adult passenger (if any)
+                const firstPassengerItem = document.querySelector(".passenger-item");
+                if (firstPassengerItem) {
+                    firstPassengerItem.click(); // Simulate a click on the first passenger to focus
+                }
+            });
+        </script>
+    </head>
+
+    <body>
+        <header class="bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light container-fluid">
+                <a class="navbar-brand" href="#"><img src="../logo.png" alt="FlyDream" class="logo"></a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <hr />
+            <nav class="navbar navbar-light container-fluid">
+              <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+              </div>
+        
+              <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-light p-4">
+                  <div class="row">
+                    <h5 class="text-black h4 mono">Menu</h5>
+                  </div>
+                  <div class="row">
+                    
+                  </div>
+                </div>
+              </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="top-component">
+                <section class="container my-5">
+                    <div class="row progress-tracker">
+                        <div class="col mono center bg-light">
+                            <span class="button-text">Flights</span>
+                        </div>
+                        <div class="col mono center action">
+                            <span class="button-text">Seat selection</span>
+                        </div>
+                        <div class="col mono center bg-light">
+                          <span class="button-text">In-flight</span>
+                      </div>
+                        <div class="col mono center bg-light">
+                            <span class="button-text">Details</span>
+                        </div>
+                        <div class="col mono center bg-light">
+                            <span class="button-text">Payment</span>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            
+            
+            <section>
+                <div class="container">
+                    <form action="/submitSeats" method="POST" onsubmit="prepareSubmission()">
+                        <div class="row px-4">
+                            <!-- Passenger List Accordion -->
+                            <div class="col">
+                                <div class="container mt-4">
+                                    <div id="passengers_list" class="accordion">
+                                        <!--If there are adults then draw the toggle for the adult -->
+                                        {%if ticket_dem["adults"] != 0%}
+                                        
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#adult-passengers">
+                                                    Adult
+                                                </button>
+                                            </h2>
+                                            <div id="adult-passengers" class="accordion-collapse collapse show">
+                                                <div class="accordion-body">
+                                                    <ul class="list-group">
+                                                        <!--for each adult, draw the below-->
+                                                        {%for i in range(ticket_dem['adults'])%}
+                                                        <li class="list-group-item passenger-item" data-name="Adult #{{i+1}}" onclick="selectPassenger(this, {{i}})">Adult #{{i+1}}</li>
+                                                        {%endfor%}
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+                                        <!--if there are children then draw the above div-->
+                                        {%if ticket_dem["child"] != 0%}
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#child-passengers">
+                                                    Child
+                                                </button>
+                                            </h2>
+                                            <div id="child-passengers" class="accordion-collapse collapse">
+                                                <div class="accordion-body">
+                                                    <ul class="list-group">
+                                                        {%for i in range(ticket_dem['child'])%}
+                                                        <li class="list-group-item passenger-item" data-name="Child #{{i+1}}" onclick="selectPassenger(this, {{i+(ticket_dem['adults'])}})">Child #{{i+1}}</li>
+                                                        {%endfor%}                                                    
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endif%}
+
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Seat Map -->
+                            <div class="col">
+                                <div id="seatmap" onload="drawSeats()">
+                                    <div id="economy">
+                                        <!-- Seat map gets dynamically generated here -->
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Seat Legend -->
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Seat Legend</h5>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td><span class="legend-square bg-primary"></span></td>
+                                                    <td>Available</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="legend-square bg-warning"></span></td>
+                                                    <td>Selected</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
+            
+                        <!-- Hidden Input to capture selected seats for all passengers -->
+                        <input type="hidden" name="selected-seats" id="selected-seats" value="">
+            
+                        <!-- Submit Button -->
+                        <div class="container text-center mt-4">
+                            <button type="submit" class="btn btn-warning btn-lg" id="nextButton">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-dark text-light py-4 mt-5 mt-auto py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>ABOUT</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">About us</a></li>
+                            <li><a href="#" class="text-light">Project details</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>SUPPORT</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Contact</a></li>
+                            <li><a href="#" class="text-light">Q&A</a></li>
+                            <li><a href="#" class="text-light">Branches near me</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>LEGAL</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                            <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="bg-light">
+                <p class="text-center mb-0">FlyDreamAir x meowLAN</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
