@@ -85,6 +85,7 @@
         <script>
             // Global Variables
             let currentPassengerIndex = 0; // Track the index of the current passenger
+            let currentPassengerType = "adults";
             let passengerSeats = {};  // Store seat assignments for each passenger
             let takenSeats = new Set();  // Keep track of taken seats
         
@@ -264,6 +265,9 @@
                             <div class="col">
                                 <div class="container mt-4">
                                     <div id="passengers_list" class="accordion">
+                                        <!--If there are adults then draw the toggle for the adult -->
+                                        {%if ticket_dem["adults"] != 0%}
+                                        
                                         <div class="accordion-item">
                                             <h2 class="accordion-header">
                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#adult-passengers">
@@ -273,12 +277,18 @@
                                             <div id="adult-passengers" class="accordion-collapse collapse show">
                                                 <div class="accordion-body">
                                                     <ul class="list-group">
-                                                        <li class="list-group-item passenger-item" data-name="John Doe" onclick="selectPassenger(this, 0)">John Doe</li>
-                                                        <li class="list-group-item passenger-item" data-name="Jane Doe" onclick="selectPassenger(this, 1)">Jane Doe</li>
+                                                        <!--for each adult, draw the below-->
+                                                        {%for i in range(ticket_dem['adults'])%}
+                                                        <li class="list-group-item passenger-item" data-name="Adult #{{i+1}}" onclick="selectPassenger(this, {{i}})">Adult #{{i+1}}</li>
+                                                        {%endfor%}
+                                                        
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
+                                        {%endif%}
+                                        <!--if there are children then draw the above div-->
+                                        {%if ticket_dem["child"] != 0%}
                                         <div class="accordion-item">
                                             <h2 class="accordion-header">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#child-passengers">
@@ -288,18 +298,22 @@
                                             <div id="child-passengers" class="accordion-collapse collapse">
                                                 <div class="accordion-body">
                                                     <ul class="list-group">
-                                                        <li class="list-group-item passenger-item" data-name="Baby Doe" onclick="selectPassenger(this, 2)">Baby Doe</li>
+                                                        {%for i in range(ticket_dem['child'])%}
+                                                        <li class="list-group-item passenger-item" data-name="Child #{{i+1}}" onclick="selectPassenger(this, {{i+(ticket_dem['adults'])}})">Child #{{i+1}}</li>
+                                                        {%endfor%}                                                    
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
+                                        {%endif%}
+
                                     </div>
                                 </div>
                             </div>
             
                             <!-- Seat Map -->
                             <div class="col">
-                                <div id="seatmap">
+                                <div id="seatmap" onload="drawSeats()">
                                     <div id="economy">
                                         <!-- Seat map gets dynamically generated here -->
                                     </div>

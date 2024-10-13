@@ -158,6 +158,10 @@
                                                     <div class="row mt-3">
                                                         <div class="col-md-3 position-relative">
                                                             <input type="text" class="form-control" id="passengerInput" placeholder="Passengers" readonly name="numPass">
+                                                            <input type="hidden" class="form-control" id="adultsInp" placeholder="Passengers" readonly name="numAdult">
+                                                            <input type="hidden" class="form-control" id="childrenInp" placeholder="Passengers" readonly name="numChild">
+                                                            <input type="hidden" class="form-control" id="infantInp" placeholder="Passengers" readonly name="numInf">
+
                                                             <div id="passengerDropdown" class="passenger-dropdown d-none">
                                                                 <div class="row">
                                                                     <h6>Passengers</h6>
@@ -166,7 +170,7 @@
                                                                             <span>Adult</span>
                                                                             <div class="passenger-controls">
                                                                                 <button type="button" class="btn btn-outline-secondary btn-circle" onclick="changePassengerCount('adult', -1)">-</button>
-                                                                                <span class="passenger-count" id="adultCount">1</span>
+                                                                                <span class="passenger-count" id="adultCount">0</span>
                                                                                 <button type="button" class="btn btn-warning btn-circle" onclick="changePassengerCount('adult', 1)">+</button>
                                                                             </div>
                                                                         </div>
@@ -286,7 +290,7 @@
 
             const passengerInput = document.getElementById('passengerInput');
             const passengerDropdown = document.getElementById('passengerDropdown');
-            let passengerCounts = { adult: 1, children: 0, infant: 0 };
+            let passengerCounts = { adult: 0, children: 0, infant: 0 };
     
             passengerInput.addEventListener('click', () => {
                 passengerDropdown.classList.toggle('d-none');
@@ -301,14 +305,17 @@
             function changePassengerCount(type, change) {
                 passengerCounts[type] += change;
                 if (passengerCounts[type] < 0) passengerCounts[type] = 0;
-                if (type === 'adult' && passengerCounts[type] < 1) passengerCounts[type] = 1;
+                if (type === 'adult' && passengerCounts[type] < 1) passengerCounts[type] = 0;
                 document.getElementById(`${type}Count`).textContent = passengerCounts[type];
                 updatePassengerInput();
             }
     
             function updatePassengerInput() {
                 const total = passengerCounts.adult + passengerCounts.children + passengerCounts.infant;
-                passengerInput.value = `${total} Passenger${total > 1 ? 's' : ''}`;
+                passengerInput.value = `${passengerCounts.adult} adult${passengerCounts.adult > 1 ? 's' : ''}, `;
+                passengerInput.value += `${passengerCounts.children} child${passengerCounts.children > 1 ? '(ren)' : ''}, `;
+                passengerInput.value += `${passengerCounts.infant} infant${passengerCounts.infant > 1 ? 's' : ''}`;
+
             }
     
             updatePassengerInput();

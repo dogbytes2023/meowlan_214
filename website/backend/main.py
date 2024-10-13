@@ -31,9 +31,19 @@ def flights():
     return render_template("flights.html", flights=available_flights, search=search)
 
 
+@app.route("/submit-flight", methods=["POST"])
+def submit_flights():
+    print(request.form)
+    ticket_details = session["numPass"].split(",")
+    ticket_dem = {}
+    for person in ticket_details:
+        ticket_dem[person.split()[1]] = int(person.split()[0])
+    print(ticket_dem)
+    return render_template("seats.html", ticket_dem=ticket_dem)
+
 
 if __name__ == "__main__":
-    app.run(port=5050)
+    app.run(port=5050, debug=True)
 
 
 
