@@ -1,0 +1,102 @@
+{
+    "customers": [
+        {
+            "personalDetails": {
+                "email": "ratwemlow@gmail.com",
+                "fname": "Ryan",
+                "lname": "Twemlow",
+                "title": "Master",
+                "dob": "2003-12-16",
+                "ph": "0480149146",
+                "type": "Adult",
+                "infantAccompanying": null
+            },
+            "flightDetails": {
+                "from": "syd",
+                "to": "mel",
+                "class": "First Class",
+                "depDate": "2024-10-14"
+            }
+        }
+    ],
+    "flights": [
+        {
+            "from": "syd",
+            "to": "mel",
+            "planeCode": "sigma",
+            "depTime": "21:00",
+            "arrTime": "6:00",
+            "depGate": "T1",
+            "arrGate": "T2",
+            "depDate": "2024-11-13",
+            "arrDate": "2024-11-14"
+        },
+        {
+            "from": "han",
+            "to": "nyc",
+            "planeCode": "delta",
+            "depTime": "14:30",
+            "arrTime": "18:15",
+            "depGate": "A3",
+            "arrGate": "B7",
+            "depDate": "2024-11-15",
+            "arrDate": "2024-11-15"
+        },
+        {
+            "from": "bne",
+            "to": "sin",
+            "planeCode": "epsilon",
+            "depTime": "08:00",
+            "arrTime": "12:45",
+            "depGate": "C2",
+            "arrGate": "D4",
+            "depDate": "2024-11-20",
+            "arrDate": "2024-11-20"
+        },
+        {
+            "from": "cbr",
+            "to": "syd",
+            "planeCode": "alpha",
+            "depTime": "16:20",
+            "arrTime": "17:10",
+            "depGate": "E5",
+            "arrGate": "F1",
+            "depDate": "2024-11-18",
+            "arrDate": "2024-11-18"
+        },
+        {
+            "from": "mel",
+            "to": "han",
+            "planeCode": "theta",
+            "depTime": "10:45",
+            "arrTime": "15:30",
+            "depGate": "G8",
+            "arrGate": "H6",
+            "depDate": "2024-11-22",
+            "arrDate": "2024-11-22"
+        },
+        {
+            "from": "sin",
+            "to": "nyc",
+            "planeCode": "lambda",
+            "depTime": "22:10",
+            "arrTime": "05:45",
+            "depGate": "I4",
+            "arrGate": "J3",
+            "depDate": "2024-11-24",
+            "arrDate": "2024-11-25"
+        },
+        {
+            "from": "nyc",
+            "to": "bne",
+            "planeCode": "kappa",
+            "depTime": "19:30",
+            "arrTime": "07:25",
+            "depGate": "K2",
+            "arrGate": "L1",
+            "depDate": "2024-11-27",
+            "arrDate": "2024-11-28"
+        }
+    ]
+
+}
