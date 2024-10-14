@@ -41,6 +41,25 @@ def submit_flights():
     print(ticket_dem)
     return render_template("seats.html", ticket_dem=ticket_dem)
 
+@app.route("/submitSeats", methods=["POST"])
+def submit_seats():
+    adult_seats = json.loads(request.form.get('adult-seats', '{}'))
+    child_seats = json.loads(request.form.get('child-seats', '{}'))
+
+    # Store seat selections in session
+    session['adult_seats'] = adult_seats
+    session['child_seats'] = child_seats
+
+    # Process seat selections (e.g., update database, generate booking, etc.)
+    # This is where you'd add your business logic for handling the seat selections
+
+    # For now, let's just print the selections
+    print("Adult Seats:", adult_seats)
+    print("Child Seats:", child_seats)
+
+    # Redirect to a confirmation page or the next step in your booking process
+    return render_template("inflight.html", adult_seats=adult_seats, child_seats=child_seats)
+
 
 if __name__ == "__main__":
     app.run(port=5050, debug=True)

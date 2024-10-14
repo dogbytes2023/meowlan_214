@@ -1,4 +1,11 @@
 {
+    "bookings": [
+        {
+            "resCode" : null,
+            "customerID": null
+            
+        }
+    ],
     "customers": [
         {
             "personalDetails": {
@@ -11,7 +18,8 @@
                 "ph": "",
                 "type": "Adult",
                 "infantAccompanying": null,
-                "seat": null
+                "seat": null,
+                "customerID": null
             },
             "flightDetails": {
                 "from": "syd",

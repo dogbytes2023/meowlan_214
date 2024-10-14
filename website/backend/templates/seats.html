@@ -84,17 +84,17 @@
         </style>
         <script>
             // Global Variables
-            let currentPassengerIndex = 0; // Track the index of the current passenger
-            let currentPassengerType = "adults";
-            let passengerSeats = {};  // Store seat assignments for each passenger
-            let takenSeats = new Set();  // Keep track of taken seats
-        
-            // Function to draw seat map
+            let currentPassengerType = 'adult';
+            let currentPassengerIndex = 0;
+            let adultSeats = {};
+            let childSeats = {};
+            let takenSeats = new Set();
+
             function drawSeats() {
                 let economy_seatmap = document.querySelector("#economy");
                 let row = 10;
                 let col = 4;
-        
+
                 let eco_table = document.createElement("table");
                 for (let i = 0; i < row; i++) {
                     let row = document.createElement("tr");
@@ -104,12 +104,12 @@
                         seat_button.classList.add("btn", "btn-outline-primary");
                         seat_button.style.width = "50px";
                         seat_button.style.height = "50px";
-                        let charcode = 65 + k; // A, B, C, D
+                        let charcode = 65 + k;
                         let charcodehex = String.fromCharCode(charcode);
                         let row_num = i + 1;
                         seat_button.id = "" + charcodehex + row_num;
                         seat_button.innerText = seat_button.id;
-                        seat_button.type = "button"; // Ensure buttons don't submit the form
+                        seat_button.type = "button";
                         seat_button.addEventListener("click", selectSeat);
                         seat.appendChild(seat_button);
                         row.appendChild(seat);
@@ -118,83 +118,84 @@
                 }
                 economy_seatmap.appendChild(eco_table);
             }
-        
-            // Function to select a seat
+
             function selectSeat(e) {
                 const clickedSeat = e.target;
                 const seatId = clickedSeat.id;
-        
-                // Ensure a passenger is selected
-                if (currentPassengerIndex === null) {
-                    alert("Please select a passenger first.");
-                    return;
-                }
-        
-                // Deselect seat if already selected by the current passenger
-                if (passengerSeats[currentPassengerIndex] === seatId) {
+
+                let currentSeats = currentPassengerType === 'adult' ? adultSeats : childSeats;
+                
+                if (currentSeats[currentPassengerIndex] === seatId) {
                     clickedSeat.classList.remove("selected-seat");
-                    delete passengerSeats[currentPassengerIndex];
+                    delete currentSeats[currentPassengerIndex];
                     takenSeats.delete(seatId);
                     updatePassengerList();
                     return;
                 }
-        
-                // Prevent selection of already taken seats
+
                 if (takenSeats.has(seatId)) {
                     alert("This seat is already taken by another passenger.");
                     return;
                 }
-        
-                // Remove previous seat for the current passenger
-                if (passengerSeats[currentPassengerIndex]) {
-                    let previousSeat = document.getElementById(passengerSeats[currentPassengerIndex]);
+
+                if (currentSeats[currentPassengerIndex]) {
+                    let previousSeat = document.getElementById(currentSeats[currentPassengerIndex]);
                     previousSeat.classList.remove("selected-seat");
-                    takenSeats.delete(passengerSeats[currentPassengerIndex]);
+                    takenSeats.delete(currentSeats[currentPassengerIndex]);
                 }
-        
-                // Assign new seat to the current passenger
+
                 clickedSeat.classList.add("selected-seat");
-                passengerSeats[currentPassengerIndex] = seatId;
+                currentSeats[currentPassengerIndex] = seatId;
                 takenSeats.add(seatId);
-        
+
                 updatePassengerList();
             }
-        
-            // Function to update the passenger list display
+
             function updatePassengerList() {
-                const passengerItems = document.querySelectorAll(".passenger-item");
-                passengerItems.forEach((item, index) => {
-                    const passengerSeat = passengerSeats[index];
+                updatePassengerItems('adult');
+                updatePassengerItems('child');
+            }
+
+            function updatePassengerItems(type) {
+                const items = document.querySelectorAll(`#${type}-passengers .passenger-item`);
+                const seats = type === 'adult' ? adultSeats : childSeats;
+                
+                items.forEach((item, index) => {
+                    const passengerSeat = seats[index];
+                    const seatDisplay = item.querySelector('.seat-display');
+                    const seatInput = item.querySelector('.seat-input');
+                    
                     if (passengerSeat) {
-                        item.innerText = item.getAttribute("data-name") + " (Seat: " + passengerSeat + ")";
+                        seatDisplay.textContent = passengerSeat;
+                        seatInput.value = passengerSeat;
                     } else {
-                        item.innerText = item.getAttribute("data-name");
+                        seatDisplay.textContent = 'Not selected';
+                        seatInput.value = '';
                     }
                 });
             }
-        
-            // Function to select a passenger
-            function selectPassenger(element, index) {
+
+            function selectPassenger(element, type, index) {
                 const passengerItems = document.querySelectorAll(".passenger-item");
                 passengerItems.forEach(item => item.classList.remove("active-passenger"));
                 element.classList.add("active-passenger");
-                currentPassengerIndex = index; // Update the current passenger index
+                currentPassengerType = type;
+                currentPassengerIndex = index;
             }
-        
-            // Function to prepare the seat selection data for submission
+
             function prepareSubmission() {
-                const selectedSeatsInput = document.getElementById("selected-seats");
-                selectedSeatsInput.value = JSON.stringify(passengerSeats);
+                const adultSeatsInput = document.getElementById("adult-seats");
+                const childSeatsInput = document.getElementById("child-seats");
+                adultSeatsInput.value = JSON.stringify(adultSeats);
+                childSeatsInput.value = JSON.stringify(childSeats);
             }
-        
-            // Load seat map and auto-select the first adult passenger on page load
+
             document.addEventListener("DOMContentLoaded", () => {
                 drawSeats();
-        
-                // Automatically select the first adult passenger (if any)
+
                 const firstPassengerItem = document.querySelector(".passenger-item");
                 if (firstPassengerItem) {
-                    firstPassengerItem.click(); // Simulate a click on the first passenger to focus
+                    firstPassengerItem.click();
                 }
             });
         </script>
@@ -279,7 +280,10 @@
                                                     <ul class="list-group">
                                                         <!--for each adult, draw the below-->
                                                         {%for i in range(ticket_dem['adults'])%}
-                                                        <li class="list-group-item passenger-item" data-name="Adult #{{i+1}}" onclick="selectPassenger(this, {{i}})">Adult #{{i+1}}</li>
+                                                        <li class="list-group-item passenger-item" data-name="Adult #{{i+1}}" onclick="selectPassenger(this, 'adult', {{i}})">
+                                                            Adult #{{i+1}} - Seat: <span class="seat-display">Not selected</span>
+                                                            <input type="hidden" class="seat-input" name="adult_seat_{{i+1}}">
+                                                        </li>
                                                         {%endfor%}
                                                         
                                                     </ul>
@@ -298,9 +302,12 @@
                                             <div id="child-passengers" class="accordion-collapse collapse">
                                                 <div class="accordion-body">
                                                     <ul class="list-group">
-                                                        {%for i in range(ticket_dem['child'])%}
-                                                        <li class="list-group-item passenger-item" data-name="Child #{{i+1}}" onclick="selectPassenger(this, {{i+(ticket_dem['adults'])}})">Child #{{i+1}}</li>
-                                                        {%endfor%}                                                    
+                                                        {% for i in range(ticket_dem['child']) %}
+                                                        <li class="list-group-item passenger-item" data-name="Child #{{i+1}}" onclick="selectPassenger(this, 'child', {{i}})">
+                                                            Child #{{i+1}} - Seat: <span class="seat-display">Not selected</span>
+                                                            <input type="hidden" class="seat-input" name="child_seat_{{i+1}}">
+                                                        </li>
+                                                        {% endfor %}                                                   
                                                     </ul>
                                                 </div>
                                             </div>
@@ -349,6 +356,9 @@
                         <div class="container text-center mt-4">
                             <button type="submit" class="btn btn-warning btn-lg" id="nextButton">Next</button>
                         </div>
+
+                        <input type="hidden" name="adult-seats" id="adult-seats" value="">
+                        <input type="hidden" name="child-seats" id="child-seats" value="">
                     </form>
                 </div>
             </section>
