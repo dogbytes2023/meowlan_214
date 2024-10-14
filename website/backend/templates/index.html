@@ -312,10 +312,15 @@
     
             function updatePassengerInput() {
                 const total = passengerCounts.adult + passengerCounts.children + passengerCounts.infant;
-                passengerInput.value = `${passengerCounts.adult} adult${passengerCounts.adult > 1 ? 's' : ''}, `;
-                passengerInput.value += `${passengerCounts.children} child${passengerCounts.children > 1 ? '(ren)' : ''}, `;
-                passengerInput.value += `${passengerCounts.infant} infant${passengerCounts.infant > 1 ? 's' : ''}`;
-
+                passengerInput.value = `${passengerCounts.adult} adults, `;
+                passengerInput.value += `${passengerCounts.children} child, `;
+                passengerInput.value += `${passengerCounts.infant} infant `;
+                const adultsInput = document.getElementById("adultsInp");
+                const childrenInput = document.getElementById("childrenInp");
+                const infantInput = document.getElementById("infantInp");
+                adultsInput.value = `${passengerCounts.adult}`;
+                childrenInput.value = `${passengerCounts.children}`;
+                infantInput.value = `${passengerCounts.infant}`;
             }
     
             updatePassengerInput();
