@@ -146,130 +146,166 @@
                     <div class="container mt-5">
                         <h2 class="mb-4 mono">Passenger Details</h2>
                 
-                        <!-- Adult Passenger Form -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h6 class="mono">Adult Passenger</h6>
-                            </div>
-                            <div class="card-body">
-                                <form id="adultForm">
-                                    <div class="row mb-3">
-                                        <div class="col-md-2">
-                                            <label for="adultTitle" class="form-label">Title</label>
-                                            <select id="adultTitle" class="form-select" required>
-                                                <option value="">Select</option>
-                                                <option value="Mr">Mr</option>
-                                                <option value="Mrs">Mrs</option>
-                                                <option value="Ms">Ms</option>
-                                                <option value="Dr">Dr</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="adultFirstName" class="form-label">First Name</label>
-                                            <input type="text" id="adultFirstName" class="form-control" required>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="adultLastName" class="form-label">Last Name</label>
-                                            <input type="text" id="adultLastName" class="form-control" required>
+                        <div class="accordion" id="adultAccordion">
+                            {% if ticket_dem["adults"] > 0 %}
+                                <h6 class="mono">Adult Passenger(s)</h6>
+                                {% for i in range(ticket_dem['adults']) %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading{{ i }}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ i }}" aria-expanded="false" aria-controls="collapse{{ i }}">
+                                                Adult Passenger {{ i + 1 }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ i }}" class="accordion-collapse collapse" aria-labelledby="heading{{ i }}" data-bs-parent="#adultAccordion">
+                                            <div class="accordion-body">
+                                                <form id="adultForm{{ i }}">
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-2">
+                                                            <label for="adultTitle{{ i }}" class="form-label">Title</label>
+                                                            <select id="adultTitle{{ i }}" class="form-select" required>
+                                                                <option value="">Select</option>
+                                                                <option value="Mr">Mr</option>
+                                                                <option value="Mrs">Mrs</option>
+                                                                <option value="Ms">Ms</option>
+                                                                <option value="Dr">Dr</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="adultFirstName{{ i }}" class="form-label">First Name</label>
+                                                            <input type="text" id="adultFirstName{{ i }}" class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="adultLastName{{ i }}" class="form-label">Last Name</label>
+                                                            <input type="text" id="adultLastName{{ i }}" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="adultEmail{{ i }}" class="form-label">Email</label>
+                                                            <input type="email" id="adultEmail{{ i }}" class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="adultPhone{{ i }}" class="form-label">Phone Number</label>
+                                                            <input type="tel" id="adultPhone{{ i }}" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="adultDOB{{ i }}" class="form-label">Date of Birth</label>
+                                                            <input type="date" id="adultDOB{{ i }}" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="adultEmail" class="form-label">Email</label>
-                                            <input type="email" id="adultEmail" class="form-control" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="adultPhone" class="form-label">Phone Number</label>
-                                            <input type="tel" id="adultPhone" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="adultDOB" class="form-label">Date of Birth</label>
-                                            <input type="date" id="adultDOB" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
-                
+                        
+
                         <!-- Child Passenger Form -->
-                        <div class="card">
-                            <div class="card-header mono">
-                                <h6>Child Passenger (2-11 years)</h6>
-                            </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="row mb-3">
-                                        <div class="col-md-2">
-                                            <label for="childTitle" class="form-label">Title</label>
-                                            <select id="childTitle" class="form-select">
-                                                <option value="">Select</option>
-                                                <option value="Master">Master</option>
-                                                <option value="Miss">Miss</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="childFirstName" class="form-label">First Name</label>
-                                            <input type="text" id="childFirstName" class="form-control" required>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="childLastName" class="form-label">Last Name</label>
-                                            <input type="text" id="childLastName" class="form-control" required>
+                        <div class="accordion" id="childAccordion">
+                            {% if ticket_dem["child"] > 0 %}
+                                <h6 class="mono pt-5">Child Passenger(s)</h6>
+                                {% for i in range(ticket_dem['child']) %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingChild{{ i }}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChild{{ i }}" aria-expanded="false" aria-controls="collapseChild{{ i }}">
+                                                Child Passenger {{ i + 1 }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapseChild{{ i }}" class="accordion-collapse collapse" aria-labelledby="headingChild{{ i }}" data-bs-parent="#childAccordion">
+                                            <div class="accordion-body">
+                                                <form id="childForm{{ i }}">
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-2">
+                                                            <label for="childTitle{{ i }}" class="form-label">Title</label>
+                                                            <select id="childTitle{{ i }}" class="form-select">
+                                                                <option value="">Select</option>
+                                                                <option value="Master">Master</option>
+                                                                <option value="Miss">Miss</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="childFirstName{{ i }}" class="form-label">First Name</label>
+                                                            <input type="text" id="childFirstName{{ i }}" class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="childLastName{{ i }}" class="form-label">Last Name</label>
+                                                            <input type="text" id="childLastName{{ i }}" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="childDOB{{ i }}" class="form-label">Date of Birth</label>
+                                                            <input type="date" id="childDOB{{ i }}" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="childDOB" class="form-label">Date of Birth</label>
-                                            <input type="date" id="childDOB" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
-                
+
+                        <hr />
+
                         <!-- Infant Passenger Form -->
-                        <div class="card">
-                            <div class="card-header-inactive mono" id="infantHeader">
-                                <h6>Infant Passenger (Under 2 years)</h6>
-                            </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="row mb-3">
-                                        <div class="col-md-2">
-                                            <label for="infantTitle" class="form-label">Title</label>
-                                            <select id="infantTitle" class="form-select" disabled>
-                                                <option value="">Select</option>
-                                                <option value="Master">Master</option>
-                                                <option value="Miss">Miss</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="infantFirstName" class="form-label">First Name</label>
-                                            <input type="text" id="infantFirstName" class="form-control" required disabled>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label for="infantLastName" class="form-label">Last Name</label>
-                                            <input type="text" id="infantLastName" class="form-control" required disabled>
+                        <div class="accordion" id="infantAccordion">
+                            {% if ticket_dem["infant"] > 0 %}
+                                <h6 class="mono">Infant Passenger (Under 2 years)</h6>
+                                {% for i in range(ticket_dem['infant']) %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingInfant{{ i }}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfant{{ i }}" aria-expanded="false" aria-controls="collapseInfant{{ i }}">
+                                                Infant Passenger {{ i + 1 }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapseInfant{{ i }}" class="accordion-collapse collapse" aria-labelledby="headingInfant{{ i }}" data-bs-parent="#infantAccordion">
+                                            <div class="accordion-body">
+                                                <form id="infantForm{{ i }}">
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-2">
+                                                            <label for="infantTitle{{ i }}" class="form-label">Title</label>
+                                                            <select id="infantTitle{{ i }}" class="form-select">
+                                                                <option value="">Select</option>
+                                                                <option value="Master">Master</option>
+                                                                <option value="Miss">Miss</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="infantFirstName{{ i }}" class="form-label">First Name</label>
+                                                            <input type="text" id="infantFirstName{{ i }}" class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="infantLastName{{ i }}" class="form-label">Last Name</label>
+                                                            <input type="text" id="infantLastName{{ i }}" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <label for="infantDOB{{ i }}" class="form-label">Date of Birth</label>
+                                                            <input type="date" id="infantDOB{{ i }}" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <label for="infantAccompanying{{ i }}" class="form-label">Accompanying Adult</label>
+                                                            <select id="infantAccompanying{{ i }}" class="form-select" required>
+                                                                <option value="">Select Accompanying Adult</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="infantDOB" class="form-label">Date of Birth</label>
-                                            <input type="date" id="infantDOB" class="form-control" required disabled>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label for="infantAccompanying" class="form-label">Accompanying Adult</label>
-                                            <select id="infantAccompanying" class="form-select" required disabled>
-                                                <option value="">Select Accompanying Adult</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
+
                 
                         <!-- Submit Button -->
                         <div class="container text-center mt-4">
