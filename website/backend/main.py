@@ -41,7 +41,7 @@ def flights():
     session["class"] = request.form.get("class")
 
     # Load flight data
-    with open("./data/data.json", "r") as data:
+    with open("./data/flights.json", "r") as data:
         database = json.load(data)
 
     available_flights = []
@@ -115,8 +115,26 @@ def inflight_services():
 
     return render_template("details.html", ticket_dem=ticket_dem, services=session.get("services"))
 
+@app.route("/payment", methods=["POST"])
+def payment():
+    return render_template("payment.html", ticket_dem=ticket_dem, services=session.get("services"))
+
+
+
+@app.route("/manage", methods=["POST"])
+def manage():
+    ticketno = request.form.get("ticketno")
+    email = request.form.get("email")
+    
+
+    print(email, ticketno)
+
+
+
+    return render_template("manage.html")
+
+
+
 if __name__ == "__main__":
     app.run(port=5050, debug=True)
-
-
 
