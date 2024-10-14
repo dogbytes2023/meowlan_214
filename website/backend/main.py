@@ -117,8 +117,8 @@ def inflight_services():
 
 @app.route("/payment", methods=["POST"])
 def payment():
+    ticket_dem = session.get("ticket_dem", {'adults': 0, 'child': 0, 'infant': 0})
     return render_template("payment.html", ticket_dem=ticket_dem, services=session.get("services"))
-
 
 
 @app.route("/manage", methods=["POST"])
