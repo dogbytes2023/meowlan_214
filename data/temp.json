@@ -1,0 +1,22 @@
+{
+    "booking": {
+        "resCode" : null,
+        "customerID": null
+    },
+
+    "customer": {
+        "title": "Master",
+        "fname": "",
+        "lname": "",
+        "email": "",
+        "ph": "",
+        "passport": "",
+        "dob": "",
+        "type": "Adult",
+        "infantAccompanying": null,
+        "seat": null,
+        "flightno": "",
+        "mealpref": "",
+        "special": ""
+    }
+}
