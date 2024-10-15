@@ -175,7 +175,7 @@
                         </thead>
                         <tbody>
                             <!-- Replace with dynamic data -->
-                             {% for i in range(passengers|length) %}
+                             { % for i in range(passengers|length) % }
                             <tr>
                                 <td>{{ passengers[i]["title"] + " " + passengers[i]["first_name"] + " " + passengers[i]["last_name"] }}</td>
                                 <td>{{ passengers[i]["type"].capitalize() }}</td>
