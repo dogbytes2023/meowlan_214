@@ -1,0 +1,391 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            .mono {
+                font-family: 'Martian Mono', monospace;
+            }
+
+            .logo {
+                max-height: 150px;
+            }
+
+            .navbar-brand {
+                padding-left: 40px; 
+            }
+
+            .nav-item {
+                padding-right: 40px;
+            }
+
+            .navbar-toggler {
+                margin-right: auto; 
+            }
+
+            .progress-tracker {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .progress-tracker {
+                font-family: 'Martian Mono', monospace;
+                display: flex;
+            }
+
+            .progress-tracker .active {
+                background-color: #ffc107; /* Highlight the active step */
+            }
+
+            .progress-tracker .col {
+                text-align: center;
+                height: 100px;
+            }
+
+            .progress-tracker .col.action {
+                color: white;
+                background-color: #fecb00;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            .top-component .row {
+                padding: 20px 20px 20px 20px;
+            }
+
+            .top-component .row div {
+                padding: 30px 30px 30px 30px;
+            }
+
+            .action {
+                background-color: #fecb00;
+            }
+
+            .form-control, .form-select {
+                background-color: #f8f9fa;
+            }
+            .card {
+                margin-bottom: 20px;
+            }
+            .mono {
+                font-family: 'Martian Mono', monospace;
+            }
+            /* Styling for active card header */
+            .card-header {
+                background-color: #3D2E88; /* Purple color */
+                color: white;
+            }
+            .card-header-inactive {
+                background-color: #d6d6d6; /* Gray for inactive section */
+                color: #6c757d;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header class="bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light container-fluid">
+                <a class="navbar-brand" href="#"><img src="/static/logo.png" alt="FlyDream" class="logo"></a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <hr />
+            <nav class="navbar navbar-light container-fluid">
+              <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+              </div>
+        
+              <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-light p-4">
+                  <div class="row">
+                    <h5 class="text-black h4 mono">Menu</h5>
+                  </div>
+                  <div class="row">
+                    
+                  </div>
+                </div>
+              </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="top-component">
+                <section class="container my-5">
+                    <div class="row progress-tracker">
+                        <div class="col mono center bg-light">
+                            <span class="button-text">Flights</span>
+                        </div>
+                        <div class="col mono center bg-light">
+                            <span class="button-text">Seat selection</span>
+                        </div>
+                        <div class="col mono center bg-light">
+                          <span class="button-text">In-flight</span>
+                      </div>
+                        <div class="col mono center action">
+                            <span class="button-text">Details</span>
+                        </div>
+                        <div class="col mono center bg-light">
+                            <span class="button-text">Payment</span>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            
+            <section>
+                <form action="/payment" method="post">
+                    <div class="container mt-5">
+                        <h2 class="mb-4 mono">Passenger Details</h2>
+                
+                        <!-- Adult Passenger Accordion -->
+                        <div class="accordion" id="adultAccordion">
+                            {% if ticket_dem["adults"] > 0 %}
+                                <h6 class="mono">Adult Passenger(s)</h6>
+                                {% for i in range(ticket_dem['adults']) %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading{{ i }}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ i }}" aria-expanded="false" aria-controls="collapse{{ i }}">
+                                                Adult Passenger {{ i + 1 }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ i }}" class="accordion-collapse collapse" aria-labelledby="heading{{ i }}" data-bs-parent="#adultAccordion">
+                                            <div class="accordion-body">
+                                                <!-- Removed the nested form, now part of the main form -->
+                                                <div class="row mb-3">
+                                                    <div class="col-md-2">
+                                                        <label for="adultTitle{{ i }}" class="form-label">Title</label>
+                                                        <select id="adultTitle{{ i }}" name="adultTitle{{ i }}" class="form-select" required>
+                                                            <option value="">Select</option>
+                                                            <option value="Mr">Mr</option>
+                                                            <option value="Mrs">Mrs</option>
+                                                            <option value="Ms">Ms</option>
+                                                            <option value="Dr">Dr</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label for="adultFirstName{{ i }}" class="form-label">First Name</label>
+                                                        <input type="text" id="adultFirstName{{ i }}" name="adultFirstName{{ i }}" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label for="adultLastName{{ i }}" class="form-label">Last Name</label>
+                                                        <input type="text" id="adultLastName{{ i }}" name="adultLastName{{ i }}" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="adultEmail{{ i }}" class="form-label">Email</label>
+                                                        <input type="email" id="adultEmail{{ i }}" name="adultEmail{{ i }}" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="adultPhone{{ i }}" class="form-label">Phone Number</label>
+                                                        <input type="tel" id="adultPhone{{ i }}" name="adultPhone{{ i }}" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="adultDOB{{ i }}" class="form-label">Date of Birth</label>
+                                                        <input type="date" id="adultDOB{{ i }}" name="adultDOB{{ i }}" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                
+                        <!-- Child Passenger Accordion -->
+                        <div class="accordion" id="childAccordion">
+                            {% if ticket_dem["child"] > 0 %}
+                                <h6 class="mono pt-5">Child Passenger(s)</h6>
+                                {% for i in range(ticket_dem['child']) %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingChild{{ i }}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChild{{ i }}" aria-expanded="false" aria-controls="collapseChild{{ i }}">
+                                                Child Passenger {{ i + 1 }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapseChild{{ i }}" class="accordion-collapse collapse" aria-labelledby="headingChild{{ i }}" data-bs-parent="#childAccordion">
+                                            <div class="accordion-body">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-2">
+                                                        <label for="childTitle{{ i }}" class="form-label">Title</label>
+                                                        <select id="childTitle{{ i }}" name="childTitle{{ i }}" class="form-select">
+                                                            <option value="">Select</option>
+                                                            <option value="Master">Master</option>
+                                                            <option value="Miss">Miss</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label for="childFirstName{{ i }}" class="form-label">First Name</label>
+                                                        <input type="text" id="childFirstName{{ i }}" name="childFirstName{{ i }}" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label for="childLastName{{ i }}" class="form-label">Last Name</label>
+                                                        <input type="text" id="childLastName{{ i }}" name="childLastName{{ i }}" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="childDOB{{ i }}" class="form-label">Date of Birth</label>
+                                                        <input type="date" id="childDOB{{ i }}" name="childDOB{{ i }}" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                
+                        <!-- Infant Passenger Accordion -->
+                        <div class="accordion" id="infantAccordion">
+                            {% if ticket_dem["infant"] > 0 %}
+                                <h6 class="mono">Infant Passenger (Under 2 years)</h6>
+                                {% for i in range(ticket_dem['infant']) %}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingInfant{{ i }}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfant{{ i }}" aria-expanded="false" aria-controls="collapseInfant{{ i }}">
+                                                Infant Passenger {{ i + 1 }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapseInfant{{ i }}" class="accordion-collapse collapse" aria-labelledby="headingInfant{{ i }}" data-bs-parent="#infantAccordion">
+                                            <div class="accordion-body">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-2">
+                                                        <label for="infantTitle{{ i }}" class="form-label">Title</label>
+                                                        <select id="infantTitle{{ i }}" name="infantTitle{{ i }}" class="form-select">
+                                                            <option value="">Select</option>
+                                                            <option value="Master">Master</option>
+                                                            <option value="Miss">Miss</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label for="infantFirstName{{ i }}" class="form-label">First Name</label>
+                                                        <input type="text" id="infantFirstName{{ i }}" name="infantFirstName{{ i }}" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label for="infantLastName{{ i }}" class="form-label">Last Name</label>
+                                                        <input type="text" id="infantLastName{{ i }}" name="infantLastName{{ i }}" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="infantDOB{{ i }}" class="form-label">Date of Birth</label>
+                                                        <input type="date" id="infantDOB{{ i }}" name="infantDOB{{ i }}" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-12">
+                                                        <label for="infantAccompanying{{ i }}" class="form-label">Accompanying Adult</label>
+                                                        <select id="infantAccompanying{{ i }}" name="infantAccompanying{{ i }}" class="form-select" required>
+                                                            <option value="">Select Accompanying Adult</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                
+                        <!-- Submit Button -->
+                        <div class="container text-center mt-4">
+                            <button type="submit" class="btn btn-warning btn-lg" id="nextButton">Next</button>
+                        </div>
+                    </div>
+                </form>
+                
+            </section>
+        </main>
+
+        <footer class="bg-dark text-light py-4 mt-5 mt-auto py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>ABOUT</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">About us</a></li>
+                            <li><a href="#" class="text-light">Project details</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>SUPPORT</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Contact</a></li>
+                            <li><a href="#" class="text-light">Q&A</a></li>
+                            <li><a href="#" class="text-light">Branches near me</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>LEGAL</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                            <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="bg-light">
+                <p class="text-center mb-0">FlyDreamAir x meowLAN</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.getElementById('adultForm').addEventListener('change', function() {
+                const adultTitle = document.getElementById('adultTitle').value;
+                const adultFirstName = document.getElementById('adultFirstName').value;
+                const adultLastName = document.getElementById('adultLastName').value;
+    
+                if (adultTitle && adultFirstName && adultLastName) {
+                    enableInfantForm();
+                    updateAccompanyingAdultDropdown(adultTitle, adultFirstName, adultLastName);
+                } else {
+                    disableInfantForm();
+                }
+            });
+    
+            function enableInfantForm() {
+                document.getElementById('infantTitle').disabled = false;
+                document.getElementById('infantFirstName').disabled = false;
+                document.getElementById('infantLastName').disabled = false;
+                document.getElementById('infantDOB').disabled = false;
+                document.getElementById('infantAccompanying').disabled = false;
+    
+                // Change the card header color to active (purple)
+                document.getElementById('infantHeader').classList.remove('card-header-inactive');
+                document.getElementById('infantHeader').classList.add('card-header');
+            }
+    
+            function disableInfantForm() {
+                document.getElementById('infantTitle').disabled = true;
+                document.getElementById('infantFirstName').disabled = true;
+                document.getElementById('infantLastName').disabled = true;
+                document.getElementById('infantDOB').disabled = true;
+                document.getElementById('infantAccompanying').disabled = true;
+    
+                // Change the card header color to inactive (gray)
+                document.getElementById('infantHeader').classList.remove('card-header');
+                document.getElementById('infantHeader').classList.add('card-header-inactive');
+            }
+    
+            function updateAccompanyingAdultDropdown(title, firstName, lastName) {
+                const accompanyingDropdown = document.getElementById('infantAccompanying');
+                accompanyingDropdown.innerHTML = `<option value="">Select Accompanying Adult</option>`;
+                const option = document.createElement('option');
+                option.value = `${title} ${firstName} ${lastName}`;
+                option.text = `${title} ${firstName} ${lastName}`;
+                accompanyingDropdown.appendChild(option);
+            }
+        </script>
+    </body>
+</html>

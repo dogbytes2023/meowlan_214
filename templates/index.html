@@ -1,0 +1,330 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            .mono {
+                font-family: 'Martian Mono', monospace;
+            }
+
+            .logo {
+                max-height: 150px;
+            }
+
+            .navbar-brand {
+                padding-left: 40px; 
+            }
+
+            .nav-item {
+                padding-right: 40px;
+            }
+
+            .navbar-toggler {
+                margin-right: auto; 
+            }
+
+            .banner {
+                background-image: url("https://images.unsplash.com/photo-1518352724948-729151797553?q=80&w=3748&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+                background-size: cover;
+                background-position: 50% 80%;
+                color: white;
+                padding: 200px 0;
+                position: relative;
+                z-index: 1;
+                display: flex;
+            }
+
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                font-size: 40px;
+            }
+
+            .passenger-dropdown {
+                position: absolute;
+                background-color: white;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 10px;
+                z-index: 1000; /* Ensure dropdown appears on top */
+                width: 100%; /* Match the width of the input */
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            }
+
+            .tab-content {
+                background-color: rgba(255, 255, 255, 0.9);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                padding: 20px;
+                z-index: 10;
+                margin-top: 20px;
+                position: relative;
+            }
+
+            .input-form {
+                position: relative;
+                z-index: 2;
+                top: -200px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header class="bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light container-fluid">
+                <a class="navbar-brand" href="#"><img src="/static/logo.png" alt="FlyDream" class="logo"></a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <hr />
+            <nav class="navbar navbar-light container-fluid">
+              <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+              </div>
+        
+              <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-light p-4">
+                  <div class="row">
+                    <h5 class="text-black h4 mono">Menu</h5>
+                  </div>
+                  <div class="row">
+                    
+                  </div>
+                </div>
+              </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="banner">
+                <div class="container">
+                    <h1 class="display-4 text-shadow mono">Welcome back, <br/>@meowlan2024</h1>
+                </div>
+            </section>
+
+            <section class="container my-5 input-form">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active mono" id="book-tab" data-bs-toggle="tab" data-bs-target="#book" type="button" role="tab">
+                                            Book/Reserve
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link mono" id="manage-tab" data-bs-toggle="tab" data-bs-target="#manage" type="button" role="tab">
+                                            Manage Your Flight
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content mt-3" id="myTabContent">
+                                    <div class="tab-pane fade show active container" id="book" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col">
+                                                <form action="/flights" method="post">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <select class="form-control" id="from" name="from" >
+                                                                <option value="" disabled selected>From</option>
+                                                                <option value="syd">Sydney</option>
+                                                                <option value="mel">Melbourne</option>
+                                                                <option value="city1">City 1</option>
+                                                                <option value="city2">City 2</option>
+                                                                <option value="city3">City 1</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <select class="form-control" id="to" name="to" >
+                                                                <option value="" disabled selected>To</option>
+                                                                <option value="syd">Sydney</option>
+                                                                <option value="mel">Melbourne</option>
+                                                                <option value="city1">City 1</option>
+                                                                <option value="city2">City 2</option>
+                                                                <option value="city3">City 1</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="date" class="form-control" placeholder="Departure" id="departDate" name="dep">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <div class="col-md-3 position-relative">
+                                                            <input type="text" class="form-control" id="passengerInput" placeholder="Passengers" readonly name="numPass">
+                                                            <input type="hidden" class="form-control" id="adultsInp" placeholder="Passengers" readonly name="numAdult">
+                                                            <input type="hidden" class="form-control" id="childrenInp" placeholder="Passengers" readonly name="numChild">
+                                                            <input type="hidden" class="form-control" id="infantInp" placeholder="Passengers" readonly name="numInf">
+
+                                                            <div id="passengerDropdown" class="passenger-dropdown d-none">
+                                                                <div class="row">
+                                                                    <h6>Passengers</h6>
+                                                                    <div class="col-12">
+                                                                        <div class="passenger-type">
+                                                                            <span>Adult</span>
+                                                                            <div class="passenger-controls">
+                                                                                <button type="button" class="btn btn-outline-secondary btn-circle" onclick="changePassengerCount('adult', -1)">-</button>
+                                                                                <span class="passenger-count" id="adultCount">0</span>
+                                                                                <button type="button" class="btn btn-warning btn-circle" onclick="changePassengerCount('adult', 1)">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 mt-2">
+                                                                        <div class="passenger-type">
+                                                                            <span>Children</span>
+                                                                            <div class="passenger-controls">
+                                                                                <button type="button" class="btn btn-outline-secondary btn-circle" onclick="changePassengerCount('children', -1)">-</button>
+                                                                                <span class="passenger-count" id="childrenCount">0</span>
+                                                                                <button type="button" class="btn btn-warning btn-circle" onclick="changePassengerCount('children', 1)">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 mt-2">
+                                                                        <div class="passenger-type">
+                                                                            <span>Infant</span>
+                                                                            <div class="passenger-controls">
+                                                                                <button type="button" class="btn btn-outline-secondary btn-circle" onclick="changePassengerCount('infant', -1)">-</button>
+                                                                                <span class="passenger-count" id="infantCount">0</span>
+                                                                                <button type="button" class="btn btn-warning btn-circle" onclick="changePassengerCount('infant', 1)">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <select class="form-select" name="class">
+                                                                <option selected>Cabin class</option>
+                                                                <option>Economy</option>
+                                                                <option>Business</option>
+                                                                <option>First Class</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-warning mt-3">Search</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="manage" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col">
+                                                <form action="/manage" method="post">
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="ticketno" class="form-control" placeholder="Ticket no/Reservation code">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="email" name="email" class="form-control" placeholder="Your email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                        <button class="btn btn-warning px-4" type="submit">Search</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container my-5"></div>
+            </section>
+        </main>
+
+        <footer class="bg-dark text-light py-4 mt-5 mt-auto py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>ABOUT</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">About us</a></li>
+                            <li><a href="#" class="text-light">Project details</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>SUPPORT</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Contact</a></li>
+                            <li><a href="#" class="text-light">Q&A</a></li>
+                            <li><a href="#" class="text-light">Branches near me</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>LEGAL</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                            <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="bg-light">
+                <p class="text-center mb-0">FlyDreamAir x meowLAN</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            const departureDateInput = document.getElementById('departDate');
+            const returnDateInput = document.getElementById('returnDate');
+
+            departureDateInput.addEventListener('change', function() {
+                const selectedDepartureDate = new Date(departureDateInput.value);
+                selectedDepartureDate.setDate(selectedDepartureDate.getDate() + 1); // Set to the day after
+                
+                // Format the date to YYYY-MM-DD for the input
+                const formattedDate = selectedDepartureDate.toISOString().split('T')[0];
+                returnDateInput.setAttribute('min', formattedDate); // Set min to one day after departure
+                returnDateInput.value = ''; // Clear return date if it's set before the new min date
+            });
+
+            const passengerInput = document.getElementById('passengerInput');
+            const passengerDropdown = document.getElementById('passengerDropdown');
+            let passengerCounts = { adult: 0, children: 0, infant: 0 };
+    
+            passengerInput.addEventListener('click', () => {
+                passengerDropdown.classList.toggle('d-none');
+            });
+    
+            document.addEventListener('click', (event) => {
+                if (!passengerDropdown.contains(event.target) && event.target !== passengerInput) {
+                    passengerDropdown.classList.add('d-none');
+                }
+            });
+    
+            function changePassengerCount(type, change) {
+                passengerCounts[type] += change;
+                if (passengerCounts[type] < 0) passengerCounts[type] = 0;
+                if (type === 'adult' && passengerCounts[type] < 1) passengerCounts[type] = 0;
+                document.getElementById(`${type}Count`).textContent = passengerCounts[type];
+                updatePassengerInput();
+            }
+    
+            function updatePassengerInput() {
+                const total = passengerCounts.adult + passengerCounts.children + passengerCounts.infant;
+                passengerInput.value = `${passengerCounts.adult} adults, `;
+                passengerInput.value += `${passengerCounts.children} child, `;
+                passengerInput.value += `${passengerCounts.infant} infant `;
+                const adultsInput = document.getElementById("adultsInp");
+                const childrenInput = document.getElementById("childrenInp");
+                const infantInput = document.getElementById("infantInp");
+                adultsInput.value = `${passengerCounts.adult}`;
+                childrenInput.value = `${passengerCounts.children}`;
+                infantInput.value = `${passengerCounts.infant}`;
+            }
+    
+            updatePassengerInput();
+        </script>
+    </body>
+</html>
